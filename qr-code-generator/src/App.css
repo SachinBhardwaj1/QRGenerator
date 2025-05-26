@@ -43,7 +43,6 @@ html, body, #root {
   overflow: hidden;
 }
 
-/* Make sure the body has the background */
 body {
   background: url('https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
   background-size: cover;
@@ -58,7 +57,7 @@ body::before {
   left: 0;
   height: 100vh;
   width: 100vw;
-  background: rgba(255, 255, 255, 0.8); /* White overlay with 50% opacity */
+  background: rgba(255, 255, 255, 0.8);
   z-index: 0;
 }
 
@@ -132,4 +131,26 @@ body::before {
 
 .qr-container {
   margin-top: 40px;
+}
+
+.button-group {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.action-button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.action-button:hover {
+  background-color: #388e3c;
 }
