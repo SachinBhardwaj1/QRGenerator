@@ -1,0 +1,135 @@
+.app {
+  font-family: sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+input {
+  padding: 10px;
+  width: 300px;
+  margin: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.qr-grid {
+  margin-top: 20px;
+  display: inline-block;
+  border: 4px solid #000;
+}
+
+.qr-row {
+  display: flex;
+}
+
+.qr-cell {
+  width: 10px;
+  height: 10px;
+  box-sizing: border-box;
+}
+
+/* Custom CSS for App.js file
+*/
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Make sure the body has the background */
+body {
+  background: url('https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
+
+/* Fullscreen overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(255, 255, 255, 0.8); /* White overlay with 50% opacity */
+  z-index: 0;
+}
+
+#root > * {
+  position: relative;
+  z-index: 1;
+}
+
+.app-container {
+  text-align: center;
+  margin-top: 50px;
+  font-family: 'Arial', sans-serif;
+}
+
+.animated-title {
+  font-size: 3rem;
+  font-weight: bold;
+  animation: colorCycle 5s linear infinite;
+}
+
+@keyframes colorCycle {
+  0% { color: #ff4b2b; }
+  25% { color: #ff416c; }
+  50% { color: #6a82fb; }
+  75% { color: #00c9ff; }
+  100% { color: #ff4b2b; }
+}
+
+.tagline {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  background: linear-gradient(270deg, #ff6ec4, #7873f5, #00d2ff);
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 6s ease infinite;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.input-section {
+  margin-top: 20px;
+}
+
+.url-input {
+  padding: 10px;
+  width: 400px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.generate-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.generate-button:hover {
+  background-color: #357ABD;
+}
+
+.qr-container {
+  margin-top: 40px;
+}
