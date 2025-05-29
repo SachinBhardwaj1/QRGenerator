@@ -91,6 +91,7 @@ body::before {
   margin-bottom: 30px;
   background: linear-gradient(270deg, #ff6ec4, #7873f5, #00d2ff);
   background-size: 600% 600%;
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: gradientShift 6s ease infinite;
@@ -153,4 +154,52 @@ body::before {
 
 .action-button:hover {
   background-color: #388e3c;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+}
+
+
+/* Scan Qr code button */
+.scan-button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.scan-result {
+  margin-top: 30px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+}
+
+.action-button, .generate-button, .home-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #4caf50;
+  color: white;
+  transition: 0.3s;
+}
+
+.action-button:hover, .generate-button:hover, .home-button:hover {
+  background-color: #0056b3;
+}
+
+.scanned-result {
+  margin-top: 30px;
+  font-size: 18px;
 }

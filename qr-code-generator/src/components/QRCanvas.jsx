@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 
 const QRCanvas = ({ matrix }) => {
   const canvasRef = useRef();
@@ -21,6 +22,12 @@ const QRCanvas = ({ matrix }) => {
   }, [matrix]);
 
   return <canvas ref={canvasRef} />;
+};
+
+QRCanvas.propTypes = {
+  matrix: PropTypes.arrayOf(
+    PropTypes.arrayOf(PropTypes.bool)
+  ).isRequired,
 };
 
 export default QRCanvas;
