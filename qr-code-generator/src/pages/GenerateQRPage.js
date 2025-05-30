@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import qrcode from "qrcode-generator";
+import PropTypes from 'prop-types';
 
 function generateQRCodeMatrix(data) {
   const qr = qrcode(0, 'L');
@@ -42,6 +43,11 @@ function CustomQRCodeCanvas({ data }) {
 
   return <canvas ref={canvasRef} width={256} height={256} />;
 }
+CustomQRCodeCanvas.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.arrayOf(PropTypes.bool)
+  ).isRequired,
+};
 
 function GenerateQRPage() {
   const [url, setUrl] = useState("");
