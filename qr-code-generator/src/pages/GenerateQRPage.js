@@ -1,10 +1,50 @@
-import { useState, useRef } from "react";
-import { QRCodeCanvas } from "qrcode.react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import qrcode from "qrcode-generator";
+
+function generateQRCodeMatrix(data) {
+  const qr = qrcode(0, 'L');
+  qr.addData(data);
+  qr.make();
+  const size = qr.getModuleCount();
+  const matrix = [];
+
+  for (let row = 0; row < size; row++) {
+    const rowArray = [];
+    for (let col = 0; col < size; col++) {
+      rowArray.push(qr.isDark(row, col));
+    }
+    matrix.push(rowArray);
+  }
+
+  return matrix;
+}
+
+// Custom Canvas Renderer
+function CustomQRCodeCanvas({ data }) {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const size = 256;
+    const matrix = generateQRCodeMatrix(data);
+    const moduleSize = size / matrix.length;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
+    ctx.clearRect(0, 0, size, size);
+    matrix.forEach((row, y) => {
+      row.forEach((cell, x) => {
+        ctx.fillStyle = cell ? "black" : "white";
+        ctx.fillRect(x * moduleSize, y * moduleSize, moduleSize, moduleSize);
+      });
+    });
+  }, [data]);
+
+  return <canvas ref={canvasRef} width={256} height={256} />;
+}
 
 function GenerateQRPage() {
   const [url, setUrl] = useState("");
-  const [qrValue, setQrValue] = useState("");
   const [showQR, setShowQR] = useState(false);
   const [error, setError] = useState("");
   const qrRef = useRef(null);
@@ -16,7 +56,6 @@ function GenerateQRPage() {
       setShowQR(false);
       return;
     }
-    setQrValue(url);
     setShowQR(true);
     setError("");
   };
@@ -35,7 +74,11 @@ function GenerateQRPage() {
       const file = new File([blob], "qr-code.png", { type: "image/png" });
       try {
         if (navigator.share) {
-          await navigator.share({ files: [file], title: "QR Code", text: "Here's a QR code generated!" });
+          await navigator.share({
+            files: [file],
+            title: "QR Code",
+            text: "Here's a QR code generated!",
+          });
         } else {
           alert("Sharing is not supported on this browser.");
         }
@@ -63,17 +106,25 @@ function GenerateQRPage() {
           className="url-input"
         />
         <br />
-        <button onClick={generateQRCode} className="generate-button">Generate QR Code</button>
+        <button onClick={generateQRCode} className="generate-button">
+          Generate QR Code
+        </button>
         <br />
-        <button className="home-button" onClick={() => navigate("/")}>Back to Home</button>
+        <button className="home-button" onClick={() => navigate("/")}>
+          Back to Home
+        </button>
       </div>
 
       {showQR && (
         <div className="qr-container" ref={qrRef}>
-          <QRCodeCanvas value={qrValue} size={256} />
+          <CustomQRCodeCanvas data={url} />
           <div className="button-group">
-            <button className="action-button" onClick={downloadQR}>Download</button>
-            <button className="action-button" onClick={shareQR}>Share</button>
+            <button className="action-button" onClick={downloadQR}>
+              Download
+            </button>
+            <button className="action-button" onClick={shareQR}>
+              Share
+            </button>
           </div>
         </div>
       )}
